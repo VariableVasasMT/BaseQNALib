@@ -1,22 +1,19 @@
-import buble from 'rollup-plugin-buble';
+import babel from 'rollup-plugin-babel';
 let packageJson = require('./package.json');
-let {'jsnext:main': jsnext, main} = packageJson;
+let {'jsnext:main': jsnext, main, name} = packageJson;
 
 export default {
-  moduleName: 'object-browser',
-  entry: 'src/object-browser.js',
-  targets: [{
+  input: 'src/index.js',
+  output: [{
     format: 'umd',
-    dest: main
+    file: main,
+    name
   }, {
     format: 'es',
-    dest: jsnext
+    file: jsnext,
+    name
   }],
-  globals: {
-    lodash: '_'
-  },
-  external: ['lodash'],
   plugins: [
-    buble()
+    babel()
   ]
 };
