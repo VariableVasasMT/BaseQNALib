@@ -7,7 +7,8 @@
   "scripts": {
     "build": "rollup -c",
     "test": "mocha ./test/test.js --require @babel/register",
-    "test:watch": "npm test & run-when-changed --watch \"src/**.js\" --watch \"test/**.js\" --exec \"npm test\""
+    "test:coverage": "nyc --reporter=text npm run test",
+    "dev": "npm test & run-when-changed --watch \"src/**.js\" --watch \"test/**.js\" --exec \"npm test\""
   },
   "author": "",
   "license": "",
@@ -27,6 +28,7 @@
     "babel-preset-es2015-rollup": "^3.0.0",
     "chai": "^4.2.0",
     "mocha": "^3.5.3",
+    "nyc": "^14.1.0",
     "rollup": "^1.11.0",
     "rollup-plugin-babel": "^4.3.2",
     "rollup-watch": "^3.2.2",
