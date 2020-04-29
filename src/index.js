@@ -18,7 +18,4 @@ function initialize(keaAwsUrl, authEvent, authOptions = []) {
 	socketI.on("event", handleByType);
 }
 
-export default () => {
-	window.kea = initialize;
-	return window.kea;
-};
+export default initialize

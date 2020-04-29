@@ -7750,11 +7750,6 @@ var kea = (function () {
 		socketI.on("event", handleByType);
 	}
 
-	var index = () => {
-		window.kea = initialize;
-		return window.kea;
-	};
-
-	return index;
+	return initialize;
 
 }());
