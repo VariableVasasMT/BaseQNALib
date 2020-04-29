@@ -1,4 +1,4 @@
-var kea = (function (exports) {
+var kea = (function () {
 	'use strict';
 
 	function createCommonjsModule(fn, module) {
@@ -7737,20 +7737,24 @@ var kea = (function (exports) {
 	function initialize(keaAwsUrl, authEvent, authOptions = []) {
 		if (!keaAwsUrl) throw Error(ERRORS.NO_URL);
 		const socketI = lib$1(keaAwsUrl);
-		socketI.on("connect", function() {
-	    if(socketI.connected) {
-	      document.getElementById("status").innerHTML="Connected & Authorizing";
-	      socketI.emit(authEvent, ...authOptions);
-	    }
-	  });
-	  socketI.on(authEvent, function() {
-	    document.querySelector(`[${PRE_ATTRIBUTE}-status]`).innerHTML="Authorized, Waiting for message";
-	  });
-	  socketI.on('event', handleByType);
+		socketI.on("connect", function () {
+			if (socketI.connected) {
+				document.getElementById("status").innerHTML = "Connected & Authorizing";
+				socketI.emit(authEvent, ...authOptions);
+			}
+		});
+		socketI.on(authEvent, function () {
+			document.querySelector(`[${PRE_ATTRIBUTE}-status]`).innerHTML =
+				"Authorized, Waiting for message";
+		});
+		socketI.on("event", handleByType);
 	}
 
-	exports.initialize = initialize;
+	var index = () => {
+		window.kea = initialize;
+		return window.kea;
+	};
 
-	return exports;
+	return index;
 
-}({}));
+}());
